@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:projetotarsisio/telas/cadastro.dart';
 import 'package:projetotarsisio/telas/login.dart';
 import 'package:projetotarsisio/utils/OnClickNavigator.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() => runApp(MaterialApp(home: MyApp(),debugShowCheckedModeBanner: false,));
 
@@ -49,7 +50,7 @@ _inicialApp(context){
 }
 _buttonsInicio(context, texto, Widget page){
     return RaisedButton(
-      child: Text(texto, style: TextStyle(color: Color(0xFFAB0535),),),
+      child: Text(texto, style: GoogleFonts.bebasNeue(color:Color(0xFFAB0535), fontSize: 22),),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
           side: BorderSide(width: 3.0,color: Color(0xFFD3D3D3)),
@@ -62,4 +63,4 @@ _onClickNavigator(context, page){
   OnClickNavigator(context, page);
 }
 
-
+ 
