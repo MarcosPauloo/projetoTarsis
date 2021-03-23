@@ -3,9 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:projetotarsisio/telas/cadastro.dart';
 import 'package:projetotarsisio/telas/menu.dart';
 import 'package:projetotarsisio/utils/OnClickNavigator.dart';
-
-void main() => runApp(MaterialApp(home: Login(),debugShowCheckedModeBanner: false,));
-
 class Login extends StatelessWidget{
    Widget build(BuildContext context){
     return _telaCadatro(context);

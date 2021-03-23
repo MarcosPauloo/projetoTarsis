@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:projetotarsisio/utils/OnClickNavigator.dart';
 import 'package:projetotarsisio/telas/menu.dart';
 import 'package:google_fonts/google_fonts.dart';
-void main() => runApp(MaterialApp(home: Cadastro(),debugShowCheckedModeBanner: false,));
-
-
-
 class Cadastro extends StatelessWidget{
    Widget build(BuildContext context){
     return _telaCadatro(context);
