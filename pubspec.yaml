@@ -29,6 +29,9 @@ dependencies:
   flutter_svg: ^0.17.4
   google_fonts: ^1.0.0
   validadores: ^1.0.2
+  http:
+  sqflite:
+  path:
 
 
   # The following adds the Cupertino Icons font to your application.

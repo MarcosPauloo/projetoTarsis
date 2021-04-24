@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:projetotarsisio/classes/endereco.dart';
+import 'package:projetotarsisio/classes/enderecoAPI.dart';
+import 'package:projetotarsisio/classes/user.dart';
+import 'package:projetotarsisio/classes/userDao.dart';
 import 'package:projetotarsisio/telas/cadastro.dart';
 import 'package:projetotarsisio/utils/OnClickNavigator.dart';
 import 'package:projetotarsisio/telas/login.dart';
@@ -6,13 +10,29 @@ import 'package:projetotarsisio/telas/infopag.dart';
 import 'package:projetotarsisio/telas/noticias.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Menu extends StatelessWidget{
-   Widget build(BuildContext context){
-    return _telaMenu(context);
-  }
+
+class Menu extends StatefulWidget{
+  @override
+  _TelaMenuState createState() => _TelaMenuState();
 }
 
-_telaMenu(context){
+class _TelaMenuState extends State<Menu>{
+  Future<List<User>> listaUsuarios;
+  Future<Endereco> endereco;
+
+  @override
+  void initState() {
+    super.initState();
+    //listaUsuarios = UserDao().carregarUsuarios();
+    endereco = EnderecoApi().procurarCEP();
+  }
+
+  @override
+  Widget build(BuildContext context){
+    return _telaMenu(context);
+  }
+
+  _telaMenu(context){
   return Scaffold(
     appBar: AppBar(
       title: Text("HOME", style: GoogleFonts.bebasNeue(color: Color(0xFFab0535), fontSize: 40),),
@@ -105,18 +125,21 @@ Card cardSelecao(context, cor, texto1, caminho, page) {
       
     );
   }
-_buttonsLogin(context, texto){
-    return RaisedButton(
-      child: Text(texto, style: TextStyle(color: Color(0xFFD3D3D3), fontSize: 18 ,),),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
-          side: BorderSide(width: 3.0,color: Color(0xFFab0535)),
-        ),
-      color: Color(0xFFab0535),
-      onPressed: ()=> _onClickNavigator(context, Cadastro()),
-    );
+  _buttonsLogin(context, texto){
+      return RaisedButton(
+        child: Text(texto, style: TextStyle(color: Color(0xFFD3D3D3), fontSize: 18 ,),),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.0),
+            side: BorderSide(width: 3.0,color: Color(0xFFab0535)),
+          ),
+        color: Color(0xFFab0535),
+        onPressed: ()=> _onClickNavigator(context, Cadastro()),
+      );
+  }
+
+  _onClickNavigator(context, page){
+    OnClickNavigator(context, page);
+  }
 }
 
-_onClickNavigator(context, page){
-  OnClickNavigator(context, page);
-}
+

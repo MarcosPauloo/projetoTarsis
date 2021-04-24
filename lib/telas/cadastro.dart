@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:projetotarsisio/classes/User.dart';
 import 'package:projetotarsisio/utils/OnClickNavigator.dart';
 import 'package:projetotarsisio/telas/menu.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:validadores/validadores.dart';
+import 'package:projetotarsisio/classes/userDao.dart';
 class Cadastro extends StatelessWidget{
   
   final _formKey = GlobalKey<FormState>();
@@ -92,7 +94,7 @@ class Cadastro extends StatelessWidget{
           ),
           );
   }
-  _onClickNavigator(context, page){
+  _onClickNavigator(context, page) {
     String login = _tLogin.text;
     String nome = _tNome.text;
     String cpf = _tCPF.text;
@@ -100,6 +102,9 @@ class Cadastro extends StatelessWidget{
     String senha = _tPassword.text;
     String confirmarSenha = _tConfirmPassword.text;
 
+    User u = User(id: 3, login: 'top', nome: 'mpos', cpf: '123.444.111-22', email: 'top@gmail.com', senha: 'top123', endereco: 'aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa');
+    
+    //await = UserDao().insertUser(u);
 
     bool _formOK = _formKey.currentState.validate();
      if(!_formOK){
