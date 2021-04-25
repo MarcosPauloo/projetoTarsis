@@ -22,7 +22,7 @@ class UserDB{
 
   _onCreate(Database db, int version) async {
     String sql = 
-        'CREATE TABLE USUARIOS (ID INTEGER PRIMARY KEY, LOGIN VARCHAR(100), NOME VARCHAR(100), CPF VARCHAR(14), EMAIL VARCHAR(50), SENHA VARCHAR(50), ENDERECO VARCHAR(200) );';
+        'CREATE TABLE USUARIOS (ID INTEGER PRIMARY KEY, LOGIN VARCHAR(100), NOME VARCHAR(100), CPF VARCHAR(14), EMAIL VARCHAR(50), SENHA VARCHAR(50), ENDERECO VARCHAR(400) );';
     await db.execute(sql);
 
     sql = "INSERT INTO USUARIOS(ID, LOGIN, NOME, CPF, EMAIL, SENHA, ENDERECO) VALUES (12, 'usuario12', 'Usuario Um', '123.456.789-12', 'usuario1@gmail.com', 'senha1', 'casa do usuario um');";

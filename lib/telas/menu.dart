@@ -18,13 +18,15 @@ class Menu extends StatefulWidget{
 
 class _TelaMenuState extends State<Menu>{
   Future<List<User>> listaUsuarios;
-  Future<Endereco> endereco;
+  
 
   @override
   void initState() {
     super.initState();
-    //listaUsuarios = UserDao().carregarUsuarios();
-    endereco = EnderecoApi().procurarCEP();
+    listaUsuarios = UserDao().carregarUsuarios(); //parte de banco de dados
+   
+    
+    
   }
 
   @override
@@ -33,7 +35,8 @@ class _TelaMenuState extends State<Menu>{
   }
 
   _telaMenu(context){
-  return Scaffold(
+    
+    return Scaffold(
     appBar: AppBar(
       title: Text("HOME", style: GoogleFonts.bebasNeue(color: Color(0xFFab0535), fontSize: 40),),
       backgroundColor: Color(0xFFFFFFFF),
@@ -81,7 +84,7 @@ _cards(context){
   );
 }
 
-Card cardSelecao(context, cor, texto1, caminho, page) {
+Card cardSelecao(context, cor, texto1, caminho, page){
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
@@ -93,6 +96,7 @@ Card cardSelecao(context, cor, texto1, caminho, page) {
         child: InkWell(
         //splashColor: Colors.blue.withAlpha(30),
         onTap: () {
+          
           print("Card tapped");
           //Navigator.pop(context);
           OnClickNavigator(context, page);
@@ -139,6 +143,12 @@ Card cardSelecao(context, cor, texto1, caminho, page) {
 
   _onClickNavigator(context, page){
     OnClickNavigator(context, page);
+  }
+
+  _resgatarCEP()async{
+      String cep = "01001-000";
+      Endereco end = await EnderecoApi().procurarCEP(cep); 
+      print(end.cep);     
   }
 }
 

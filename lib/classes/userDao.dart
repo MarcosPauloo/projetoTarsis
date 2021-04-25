@@ -23,7 +23,7 @@ class UserDao{
     return listaUsuarios;
   }
 
-  Future<void> insertUser(User u) async {
+  insertUser(User u) async {
     UserDB database = UserDB();
     final Database db = await database.db;
     

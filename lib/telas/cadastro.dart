@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:projetotarsisio/classes/User.dart';
+import 'package:projetotarsisio/classes/endereco.dart';
+import 'package:projetotarsisio/classes/enderecoAPI.dart';
 import 'package:projetotarsisio/utils/OnClickNavigator.dart';
 import 'package:projetotarsisio/telas/menu.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:validadores/validadores.dart';
 import 'package:projetotarsisio/classes/userDao.dart';
-class Cadastro extends StatelessWidget{
+
+class Cadastro extends StatefulWidget{
+  @override
+  _TelaCadastroState createState() => _TelaCadastroState();
+}
+class _TelaCadastroState extends State<Cadastro>{
+  Future<int> i;
+  @override
+  void initState(){
+    super.initState();
+  }
   
   final _formKey = GlobalKey<FormState>();
 
@@ -15,6 +27,9 @@ class Cadastro extends StatelessWidget{
   final _tEmail = TextEditingController();
   final _tPassword = TextEditingController();
   final _tConfirmPassword = TextEditingController();
+  final _tCEP = TextEditingController();
+  final _tNumero = TextEditingController();
+  String endereco;
   
   Widget build(BuildContext context){
     return _telaCadatro(context);
@@ -50,6 +65,10 @@ class Cadastro extends StatelessWidget{
           SizedBox(height: 20.0,),
           _textFormField("CPF:", _validateCPF, _tCPF),
           SizedBox(height: 20.0,),
+          _textFormField("CEP:", _validateCEP, _tCEP),
+          SizedBox(height: 30.0,),
+          _textFormField("Numero:", _validateNumero, _tNumero),
+          SizedBox(height: 30.0,),
           _textFormField("Email", _validateEmail, _tEmail),
           SizedBox(height: 20.0,),
           _textFormField("Senha", _validateSenha, _tPassword, password: true),
@@ -101,6 +120,7 @@ class Cadastro extends StatelessWidget{
     String email = _tEmail.text;
     String senha = _tPassword.text;
     String confirmarSenha = _tConfirmPassword.text;
+    String cep = _tCEP.text;
 
     User u = User(id: 3, login: 'top', nome: 'mpos', cpf: '123.444.111-22', email: 'top@gmail.com', senha: 'top123', endereco: 'aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa');
     
@@ -110,8 +130,36 @@ class Cadastro extends StatelessWidget{
      if(!_formOK){
       return;
     }
-
+    setState(() {
+      _resgatarCEP(cep);
+    });
+    
+    User u2 = User(id: 4, login: login, nome: nome, cpf: cpf, email: email,
+    senha: senha, endereco: endereco);
+    
+    //UserDao().insertUser(u2);   --- aqui seria a parte de inserir no banco de dados
     OnClickNavigator(context, page);
+  }
+  _resgatarCEP(cep)async{
+    Endereco end = await EnderecoApi().procurarCEP(cep);  
+    endereco = end.localidade + "/" + end.logradouro + "/"+ _tNumero.text +"/" + end.bairro + "/" + end.complemento;
+    //print(end.bairro);
+    //print(endereco);     
+  }
+  String _validateCEP(String text){
+    if(text.isEmpty){
+      return "Digite o Login";
+    }
+    if(text.length<9){
+      return "Digite o cep certo ou com o -";
+    }
+    return null;
+  }
+  String _validateNumero(String text){
+    if(text.isEmpty){
+      return "Digite o número";
+    }
+    return null;
   }
   String _validateLogin(String text){
     if(text.isEmpty){
