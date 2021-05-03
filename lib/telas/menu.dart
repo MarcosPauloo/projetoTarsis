@@ -10,6 +10,9 @@ import 'package:projetotarsisio/telas/infopag.dart';
 import 'package:projetotarsisio/telas/noticias.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'listaLugares.dart';
+import 'map_page.dart';
+
 
 class Menu extends StatefulWidget{
   @override
@@ -60,7 +63,7 @@ _cards(context){
     children: <Widget>[
       Padding(
         padding: EdgeInsets.only(top:20.0, right:15.0, left:15.0),
-        child: cardSelecao(context, Color(0xFFab0535), "INFORMAÇÕES", "images/list.png", InfoPageState(),),
+        child: cardSelecao(context, Color(0xFFab0535), "INFORMAÇÕES", "images/list.png", Info(),),
       ),
       Padding(
         padding: EdgeInsets.only(top:5.0, right:15.0, left:15.0),
@@ -68,15 +71,15 @@ _cards(context){
       ),
       Padding(
         padding: EdgeInsets.only(top:5.0, right:15.0, left:15.0),
-        child: cardSelecao(context, Color(0xFFE52B50), "LOCALIZAÇÃO", "images/location.png", InfoPageState(),),
+        child: cardSelecao(context, Color(0xFFE52B50), "LOCALIZAÇÃO", "images/location.png", LugaresPage(),),
       ),
       Padding(
         padding: EdgeInsets.only(top:5.0, right:15.0, left:15.0),
-        child: cardSelecao(context, Color(0xFFE32636), "CARTEIRINHA", "images/card.png", InfoPageState(),),
+        child: cardSelecao(context, Color(0xFFE32636), "CARTEIRINHA", "images/card.png", Info(),),
       ),
       Padding(
         padding: EdgeInsets.only(top:5.0, right:15.0, left:15.0),
-        child: cardSelecao(context, Color(0xFF8B0000), "PET", "images/dog.png", InfoPageState(),),
+        child: cardSelecao(context, Color(0xFF8B0000), "PET", "images/dog.png", Info(),),
       ),
       //cardSelecao(context),
       

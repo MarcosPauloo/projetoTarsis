@@ -2,7 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:projetotarsisio/telas/cadastro.dart';
+import 'package:projetotarsisio/telas/infopag.dart';
 import 'package:projetotarsisio/telas/login.dart';
+import 'package:projetotarsisio/telas/menu.dart';
+import 'package:projetotarsisio/telas/noticias.dart';
 import 'package:projetotarsisio/utils/OnClickNavigator.dart';
 import 'package:google_fonts/google_fonts.dart';
 

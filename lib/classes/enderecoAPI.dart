@@ -5,7 +5,7 @@ import 'package:projetotarsisio/classes/endereco.dart';
 import 'package:http/http.dart' as http;
 class EnderecoApi{
 
-  procurarCEP(String cep) async {
+  Future<Endereco> procurarCEP(String cep) async {
 
     String url = "viacep.com.br";
     String path = "/ws/"+cep+"/json/";

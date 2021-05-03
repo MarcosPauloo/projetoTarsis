@@ -13,7 +13,6 @@ class Cadastro extends StatefulWidget{
   _TelaCadastroState createState() => _TelaCadastroState();
 }
 class _TelaCadastroState extends State<Cadastro>{
-  Future<int> i;
   @override
   void initState(){
     super.initState();
@@ -29,7 +28,6 @@ class _TelaCadastroState extends State<Cadastro>{
   final _tConfirmPassword = TextEditingController();
   final _tCEP = TextEditingController();
   final _tNumero = TextEditingController();
-  String endereco;
   
   Widget build(BuildContext context){
     return _telaCadatro(context);
@@ -113,7 +111,7 @@ class _TelaCadastroState extends State<Cadastro>{
           ),
           );
   }
-  _onClickNavigator(context, page) {
+  _onClickNavigator(context, page) async {
     String login = _tLogin.text;
     String nome = _tNome.text;
     String cpf = _tCPF.text;
@@ -121,30 +119,27 @@ class _TelaCadastroState extends State<Cadastro>{
     String senha = _tPassword.text;
     String confirmarSenha = _tConfirmPassword.text;
     String cep = _tCEP.text;
-
+    String endereco;
+    Endereco end = await EnderecoApi().procurarCEP(cep);   
+    endereco = end.localidade + "/" + end.logradouro + "/"+ _tNumero.text +"/" + end.bairro + "/" + end.complemento;
+    print(endereco);
     User u = User(id: 3, login: 'top', nome: 'mpos', cpf: '123.444.111-22', email: 'top@gmail.com', senha: 'top123', endereco: 'aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa');
-    
+
     //await = UserDao().insertUser(u);
 
     bool _formOK = _formKey.currentState.validate();
      if(!_formOK){
       return;
     }
-    setState(() {
-      _resgatarCEP(cep);
-    });
     
     User u2 = User(id: 4, login: login, nome: nome, cpf: cpf, email: email,
     senha: senha, endereco: endereco);
-    
+    //endereco = enderecoAux.localidade + "/" + enderecoAux.logradouro + "/"+ _tNumero.text +"/" + enderecoAux.bairro + "/" + enderecoAux.complemento;
     //UserDao().insertUser(u2);   --- aqui seria a parte de inserir no banco de dados
     OnClickNavigator(context, page);
   }
-  _resgatarCEP(cep)async{
+  Future<void> _resgatarCEP(cep)async {
     Endereco end = await EnderecoApi().procurarCEP(cep);  
-    endereco = end.localidade + "/" + end.logradouro + "/"+ _tNumero.text +"/" + end.bairro + "/" + end.complemento;
-    //print(end.bairro);
-    //print(endereco);     
   }
   String _validateCEP(String text){
     if(text.isEmpty){
